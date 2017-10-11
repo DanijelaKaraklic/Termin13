@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Resursi i konfiguracije</string>
+    <string name="first_activity_name">Prva aktivnost</string>
+    <string name="second_activity_name">Druga aktivnost</string>
+    <string name="third_activity_name">Treća aktivnost</string>
+    <string name="starting_activity">Započni aktivnost</string>
+    <string name="opening_activity">Otvaranje veb pretraživača</string>
+
+    <string name="detail_heading">Detalji veb strane</string>
+    <string name="list_heading">Spisak veb strana</string>
+
+</resources>

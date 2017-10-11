@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="urls">
+        <item>http://www.google.com</item>
+        <item>http://mail.google.com</item>
+        <item>http://maps.google.com</item>
+    </string-array>
+    
+</resources>
