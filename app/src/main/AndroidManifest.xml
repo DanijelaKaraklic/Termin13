@@ -5,7 +5,8 @@
 
     <!-- Declares that the app needs a permission to access internet -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+     <!--<uses-permission android:name="android.permission.CAMERA" />-->
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"

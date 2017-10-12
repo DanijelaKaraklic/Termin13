@@ -1,16 +1,26 @@
 package rs.aleph.android.example12.activities;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import rs.aleph.android.example12.R;
 
 // Each activity extends Activity class
 public class SecondActivity extends Activity {
+
+
+    private static final int PERMISSIONS_REQUEST_CAMERA = 0;
 
     // onCreate method is a lifecycle method called when he activity is starting
     @Override
@@ -21,10 +31,43 @@ public class SecondActivity extends Activity {
         // setContentView method draws UI
         setContentView(R.layout.activity_second);
 
+
         // Shows a toast message (a pop-up message)
         Toast toast = Toast.makeText(getBaseContext(), "SecondActivity.onCreate()", Toast.LENGTH_SHORT);
         toast.show();
+
+        // Checks for permission dynamically (Manifest.permission.INTERNET is a normal permission that is granted automatically,
+        // but for the sake of explanation ...)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block this thread waiting for the user's response!
+
+            } else {
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CAMERA);
+
+                // PERMISSIONS_REQUEST_READ_CONTACTS is an app-defined int constant. The callback method gets the result of the request.
+            }
+        } else {
+
+            // Loads an URL into the WebView
+            String URL = getIntent().getStringExtra("URL");
+            if (!URL.trim().equalsIgnoreCase("")) {
+                WebView myWebView = (WebView) findViewById(R.id.pageInfo);
+                myWebView.getSettings().setJavaScriptEnabled(true);
+                myWebView.setWebViewClient(new MyWebViewClient());
+                myWebView.loadUrl(URL.trim());
+            }
+
+        }
     }
+
+
+
+
+    // onCreate method is a lifecycle method called when he activity is starting
 
     // onStart method is a lifecycle method called after onCreate (or after onRestart when the
     // activity had been stopped, but is now again being displayed to the user)
@@ -85,14 +128,64 @@ public class SecondActivity extends Activity {
     }
 
 
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+            return false;
+        }
+    }
+
+
+    public void btnOpenCameraClicked(View view){
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivity(i);
+    }
+
+    private boolean checkCameraHardware(Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+            // this device has a camera
+            return true;
+        } else {
+            // no camera on this device
+            return false;
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_CAMERA: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // Permission was granted
+
+                    // Loads an URL into the WebView
+                    String URL = getIntent().getStringExtra("URL");
+                    if (!URL.trim().equalsIgnoreCase("")) {
+                        WebView myWebView = (WebView) findViewById(R.id.pageInfo);
+                        myWebView.getSettings().setJavaScriptEnabled(true);
+                        myWebView.setWebViewClient(new MyWebViewClient());
+                        myWebView.loadUrl(URL.trim());
+                    }
+
+                } else {
+
+                    // Permission denied
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other permissions this app might request
+        }
+    }
+
+
     public void btnStartActivityClicked(View view){
         Intent intent = new Intent(SecondActivity.this,ThirdActivity.class);
         startActivity(intent);
     }
 
 
-    public void btnOpenCameraClicked(View view){
-        Intent i = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
-        startActivity(i);
-    }
+
 }

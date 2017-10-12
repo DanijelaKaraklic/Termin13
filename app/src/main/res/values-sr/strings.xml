@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Resursi i konfiguracije</string>
-    <string name="first_activity_name">Prva aktivnost</string>
-    <string name="second_activity_name">Druga aktivnost</string>
-    <string name="third_activity_name">Treća aktivnost</string>
-    <string name="starting_activity">Započni aktivnost</string>
-    <string name="opening_activity">Otvaranje veb pretraživača</string>
+    <string name="app_name">Ресурси иконфигурације</string>
+    <string name="first_activity_name">Прва активност</string>
+    <string name="second_activity_name">Друга активност</string>
+    <string name="third_activity_name">Трећа активност</string>
+    <string name="starting_activity">Започни активност</string>
+    <string name="opening_activity">Отварање веб претраживача</string>
 
-    <string name="detail_heading">Detalji veb strane</string>
-    <string name="list_heading">Spisak veb strana</string>
+    <string name="detail_heading">Детаљи веб стране</string>
+    <string name="list_heading">Списак веб страна</string>
 
 </resources>
